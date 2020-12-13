@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "ec6876e5-b312-4512-9637-cf3cbb1d80e2",
+		"name": "Categories",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3333/v1/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Categoria 01\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:3333/v1/categories",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

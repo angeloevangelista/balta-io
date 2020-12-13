@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "57c88f7c-2753-4c66-b292-5efafcbe69f8",
+		"name": "Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3333/v1/products",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List by category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3333/v1/products/categories/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"v1",
+						"products",
+						"categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Prodto 01\",\n    \"description\": \"Teste\",\n    \"price\": 1299,\n    \"categoryId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:3333/v1/products",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
