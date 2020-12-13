@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace crud_based_baltaio
 {
@@ -20,6 +21,15 @@ namespace crud_based_baltaio
       // services.AddTransient<AppDataContext, AppDataContext>(); // ask for T, receives a new instance of T
       services.AddScoped<AppDataContext, AppDataContext>(); // ask for T, if exists an instance of T, then receives that, otherwise a new instance of T
       services.AddTransient<ProductRepository, ProductRepository>();
+
+      services.AddSwaggerGen(predicate =>
+      {
+        predicate.SwaggerDoc("v1", new OpenApiInfo
+        {
+          Title = "Crud based API",
+          Version = "v1",
+        });
+      });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,6 +39,12 @@ namespace crud_based_baltaio
 
       app.UseMvc();
       app.UseResponseCompression();
+
+      app.UseSwagger();
+      app.UseSwaggerUI(predicate =>
+      {
+        predicate.SwaggerEndpoint("/swagger/v1/swagger.json", "Crud based API - V1");
+      });
     }
   }
 }
