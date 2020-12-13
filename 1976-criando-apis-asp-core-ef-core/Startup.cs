@@ -15,6 +15,8 @@ namespace crud_based_baltaio
     {
       services.AddMvc().AddMvcOptions(setupAction => setupAction.EnableEndpointRouting = false);
 
+      services.AddResponseCompression();
+
       // services.AddTransient<AppDataContext, AppDataContext>(); // ask for T, receives a new instance of T
       services.AddScoped<AppDataContext, AppDataContext>(); // ask for T, if exists an instance of T, then receives that, otherwise a new instance of T
       services.AddTransient<ProductRepository, ProductRepository>();
@@ -26,6 +28,7 @@ namespace crud_based_baltaio
         app.UseDeveloperExceptionPage();
 
       app.UseMvc();
+      app.UseResponseCompression();
     }
   }
 }
