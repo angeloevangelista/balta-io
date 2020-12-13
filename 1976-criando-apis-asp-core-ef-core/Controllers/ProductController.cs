@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace crud_based_baltaio.Controllers
 {
-  [Route("v1/products")]
   public class ProductController
   {
     private readonly ProductRepository _repository;
@@ -21,6 +20,7 @@ namespace crud_based_baltaio.Controllers
     }
 
     [HttpGet]
+    [Route("v1/products")]
     public IEnumerable<ListProductViewModel> Get()
     {
       return this._repository.List();
@@ -28,13 +28,14 @@ namespace crud_based_baltaio.Controllers
 
 
     [HttpGet]
-    [Route("{productId}")]
+    [Route("v1/products/{productId}")]
     public Product Get(int productId)
     {
       return this._repository.Find(productId);
     }
 
     [HttpPost]
+    [Route("v1/products")]
     public ResultViewModel Post([FromBody] EditorProductViewModel model)
     {
       model.Validate();
@@ -69,7 +70,22 @@ namespace crud_based_baltaio.Controllers
       };
     }
 
+    [HttpPost]
+    [Route("v2/products")]
+    public ResultViewModel Post([FromBody] Product product)
+    {
+      this._repository.Save(product);
+
+      return new ResultViewModel()
+      {
+        Success = true,
+        Message = "Produto cadastrado com sucesso.",
+        Data = product
+      };
+    }
+
     [HttpPut]
+    [Route("v1/products")]
     public ResultViewModel Put([FromBody] EditorProductViewModel model)
     {
       model.Validate();
