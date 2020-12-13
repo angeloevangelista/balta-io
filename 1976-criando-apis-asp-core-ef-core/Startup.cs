@@ -1,4 +1,5 @@
 using crud_based_baltaio.Data;
+using crud_based_baltaio.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ namespace crud_based_baltaio
 
       // services.AddTransient<AppDataContext, AppDataContext>(); // ask for T, receives a new instance of T
       services.AddScoped<AppDataContext, AppDataContext>(); // ask for T, if exists an instance of T, then receives that, otherwise a new instance of T
+      services.AddTransient<ProductRepository, ProductRepository>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

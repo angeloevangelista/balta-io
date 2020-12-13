@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using crud_based_baltaio.Data;
 using crud_based_baltaio.Models;
+using crud_based_baltaio.Repositories;
 using crud_based_baltaio.ViewModels;
 using crud_based_baltaio.ViewModels.ProductViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,28 +13,17 @@ namespace crud_based_baltaio.Controllers
   [Route("v1/products")]
   public class ProductController
   {
-    private readonly AppDataContext _context;
+    private readonly ProductRepository _repository;
 
-    public ProductController(AppDataContext context)
+    public ProductController(ProductRepository repository)
     {
-      this._context = context;
+      this._repository = repository;
     }
 
     [HttpGet]
     public IEnumerable<ListProductViewModel> Get()
     {
-      return this._context.Products
-      .Include(product => product.Category)
-      .Select(product => new ListProductViewModel()
-      {
-        Id = product.Id,
-        Title = product.Title,
-        Price = product.Price,
-        CategoryId = product.CategoryId,
-        Category = product.Category.Title,
-      })
-      .AsNoTracking()
-      .ToList();
+      return this._repository.List();
     }
 
 
@@ -42,9 +31,7 @@ namespace crud_based_baltaio.Controllers
     [Route("{productId}")]
     public Product Get(int productId)
     {
-      return this._context.Products
-        .AsNoTracking()
-        .FirstOrDefault(product => Equals(product.Id, productId));
+      return this._repository.Find(productId);
     }
 
     [HttpPost]
@@ -72,8 +59,7 @@ namespace crud_based_baltaio.Controllers
         LastUpdateDate = DateTime.Now,
       };
 
-      this._context.Products.Add(product);
-      this._context.SaveChanges();
+      this._repository.Save(product);
 
       return new ResultViewModel()
       {
@@ -96,7 +82,7 @@ namespace crud_based_baltaio.Controllers
           Data = model.Notifications
         };
 
-      Product product = this._context.Products.Find(model.Id);
+      Product product = this._repository.Find(model.Id);
 
       product.Title = model.Title;
       product.Image = model.Image;
@@ -106,8 +92,7 @@ namespace crud_based_baltaio.Controllers
       product.Description = model.Description;
       product.LastUpdateDate = DateTime.Now;
 
-      this._context.Entry<Product>(product).State = EntityState.Modified;
-      this._context.SaveChanges();
+      this._repository.Update(product);
 
       return new ResultViewModel()
       {
