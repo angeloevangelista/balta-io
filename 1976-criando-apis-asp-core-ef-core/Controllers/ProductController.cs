@@ -36,6 +36,7 @@ namespace crud_based_baltaio.Controllers
 
     [HttpPost]
     [Route("v1/products")]
+    [ResponseCache(Location = ResponseCacheLocation.Client, Duration = 60)] // Cache-Control: public,max-age=60
     public ResultViewModel Post([FromBody] EditorProductViewModel model)
     {
       model.Validate();
