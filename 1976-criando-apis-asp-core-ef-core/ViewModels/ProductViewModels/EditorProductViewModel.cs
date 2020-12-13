@@ -1,6 +1,9 @@
+using Flunt.Validations;
+using Flunt.Notifications;
+
 namespace crud_based_baltaio.ViewModels.ProductViewModels
 {
-  public class EditorProductViewModel
+  public class EditorProductViewModel : Notifiable, IValidatable
   {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -9,5 +12,15 @@ namespace crud_based_baltaio.ViewModels.ProductViewModels
     public int Quantity { get; set; }
     public string Image { get; set; }
     public int CategoryId { get; set; }
+
+    public void Validate()
+    {
+      AddNotifications(
+        new Contract()
+          .HasMinLen(Title, 3, "Title", "O título deve conter pelo menos 3 caracteres.")
+          .HasMaxLen(Title, 120, "Title", "O título deve conter até 120 caracteres.")
+          .IsGreaterThan(Price, 0, "Price", "O preço deve ser maior que zero.")
+      );
+    }
   }
 }

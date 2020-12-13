@@ -50,6 +50,16 @@ namespace crud_based_baltaio.Controllers
     [HttpPost]
     public ResultViewModel Post([FromBody] EditorProductViewModel model)
     {
+      model.Validate();
+
+      if (model.Invalid)
+        return new ResultViewModel()
+        {
+          Success = false,
+          Message = "Não foi possível cadastrar o produto.",
+          Data = model.Notifications,
+        };
+
       Product product = new Product()
       {
         Title = model.Title,
@@ -76,6 +86,16 @@ namespace crud_based_baltaio.Controllers
     [HttpPut]
     public ResultViewModel Put([FromBody] EditorProductViewModel model)
     {
+      model.Validate();
+
+      if (model.Invalid)
+        return new ResultViewModel
+        {
+          Success = false,
+          Message = "Não foi possível alterar o produto",
+          Data = model.Notifications
+        };
+
       Product product = this._context.Products.Find(model.Id);
 
       product.Title = model.Title;
