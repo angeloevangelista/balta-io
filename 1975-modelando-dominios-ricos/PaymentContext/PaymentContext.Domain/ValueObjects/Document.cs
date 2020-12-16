@@ -1,5 +1,5 @@
 using Flunt.Validations;
-using PaymentContex.Shared.ValueObjects;
+using PaymentContext.Shared.ValueObjects;
 using PaymentContext.Domain.Enums;
 
 namespace PaymentContext.Domain.ValueObjects
