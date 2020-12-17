@@ -6,7 +6,7 @@ using PaymentContext.Shared.Commands;
 
 namespace PaymentContext.Domain.Commands
 {
-  public class CreatePaypalSubscriptionCommand : Notifiable, ICommand
+  public class CreatePaypalSubscriptionCommand : Command
   {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -30,7 +30,7 @@ namespace PaymentContext.Domain.Commands
     public string Country { get; set; }
     public string ZipCode { get; set; }
 
-    public void Validate()
+    public override void Validate()
     {
       AddNotifications(new Contract()
         .Requires()

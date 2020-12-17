@@ -1,9 +1,10 @@
 using System;
 using PaymentContext.Domain.Enums;
+using PaymentContext.Shared.Commands;
 
 namespace PaymentContext.Domain.Commands
 {
-  public class CreateCreditCardSubscriptionCommand
+  public class CreateCreditCardSubscriptionCommand : Command
   {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -28,5 +29,7 @@ namespace PaymentContext.Domain.Commands
     public string State { get; set; }
     public string Country { get; set; }
     public string ZipCode { get; set; }
+
+    public override void Validate() { }
   }
 }
