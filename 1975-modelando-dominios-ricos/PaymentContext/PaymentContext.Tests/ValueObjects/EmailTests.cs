@@ -9,17 +9,17 @@ namespace PaymentContext.Tests.ValueObjects
     [TestMethod]
     public void ShouldReturnErrorWhenAddressIsNotAVAlidEmaillAddress()
     {
-      var name = new Email("thisisnotavalidemail");
+      var email = new Email("thisisnotavalidemail");
 
-      Assert.IsTrue(name.Invalid);
+      Assert.IsTrue(email.Invalid);
     }
 
     [TestMethod]
     public void ShouldReturnSuccessWhenAddressIsAValidEmailAddress()
     {
-      var name = new Email("this.is@valid.email");
+      var email = new Email("this.is@valid.email");
 
-      Assert.IsTrue(name.Valid);
+      Assert.IsTrue(email.Valid);
     }
   }
 }

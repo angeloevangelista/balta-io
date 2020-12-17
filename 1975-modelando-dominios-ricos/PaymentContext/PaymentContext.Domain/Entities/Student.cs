@@ -30,9 +30,12 @@ namespace PaymentContext.Domain.Entities
     {
       var hasActiveSubscription = _subscriptions.Any(sub => sub.Active);
 
+      _subscriptions.Add(subscription);
+
       AddNotifications(new Contract()
         .Requires()
         .IsFalse(hasActiveSubscription, "Student.Subscriptions", "Já existe uma assinatura ativa.")
+        .AreNotEquals(0, subscription.Payments.Count, "Student.Subscription.Payments", "Esta assinatura não possui pagamentos.")
       );
 
       // Alternativa
