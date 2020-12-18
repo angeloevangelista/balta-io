@@ -45,7 +45,7 @@ namespace PaymentContext.Domain.Handlers
       }
 
       // Verificar se o E-mail já está cadastrado
-      if (_studentRepository.DocumentExists(command.EmailAddress))
+      if (_studentRepository.EmailExists(command.EmailAddress))
       {
         AddNotification("EmailAddress", "Este E-mail já está em uso.");
         return _failCommandResult;
